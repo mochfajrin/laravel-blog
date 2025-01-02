@@ -22,6 +22,9 @@ class Post extends Model
         "published_at",
         "featured"
     ];
+    protected $casts = [
+        "published_at" => "datetime"
+    ];
     public function author()
     {
         return $this->belongsTo(User::class, "user_id");
