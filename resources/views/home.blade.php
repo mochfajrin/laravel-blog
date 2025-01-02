@@ -4,10 +4,10 @@
             <h1 class="text-2xl md:text-3xl font-bold text-center lg:text-5xl text-gray-700">
                 Welcome to <span class="text-red-700">Fajrin</span> <span class="text-gray-900"> News</span>
             </h1>
-            <p class="text-gray-500 text-lg mt-1">Best Blog in the universe</p>
-            <a class="px-3 py-2 text-lg text-white bg-gray-800 rounded mt-5 inline-block"
-                href="http://127.0.0.1:8000/blog">Start
-                Reading</a>
+            <p class="text-gray-500 text-lg mt-2">Get News About Programming, Anime, Linux And Other Stuff</p>
+            <a class="px-3 py-2 text-lg text-white bg-red-600 rounded mt-5 inline-block" wire:navigate
+                href="{{ route('posts.index') }}"><strong>Start Reading</strong>
+            </a>
         </div>
     @endsection
     <div class="w-full mb-10">
@@ -20,7 +20,7 @@
                     @endforeach
                 </div>
             </div>
-            <a class="mt-10 block text-center text-lg text-red-700 font-semibold" href="http://127.0.0.1:8000/blog">More
+            <a class="mt-10 block text-center text-lg text-red-700 font-semibold" href="{{ route('posts.index') }}">More
                 Posts</a>
         </div>
         <hr>
@@ -33,7 +33,7 @@
                 @endforeach
             </div>
         </div>
-        <a class="mt-10 block text-center text-lg text-red-700 font-semibold" href="http://127.0.0.1:8000/blog">More
+        <a class="mt-10 block text-center text-lg text-red-700 font-semibold" href="{{ route('posts.index') }}">More
             Posts</a>
     </div>
 </x-app-layout>
