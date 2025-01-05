@@ -1,4 +1,9 @@
-<div class="ms-3 relative">
+<div class="flex space-x-4 ms-3 relative">
+    @can('view-admin-panel', \App\Models\User::class)
+        <x-nav-link :navigate='false' href="{{ route('filament.admin.pages.dashboard') }}">
+            {{ __('Admin Panel') }}
+        </x-nav-link>
+    @endcan
     <x-dropdown align="right" width="48">
         <x-slot name="trigger">
             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())

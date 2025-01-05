@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create(
             [
                 'name' => Config::get("admin.name"),
-                "is_admin" => true,
+                "role" => 1,
                 'email' => Config::get("admin.email"),
                 'email_verified_at' => now(),
                 'password' => Hash::make(Config::get("admin.password")),
