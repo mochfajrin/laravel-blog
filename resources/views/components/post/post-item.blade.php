@@ -1,10 +1,9 @@
 @props(['post'])
-<article wire:key={{ $post->id }}
-    {{ $attributes->merge(['class' => '[&:not(:last-child)]:border-b border-gray-100 pb-10']) }}>
+<article {{ $attributes->merge(['class' => '[&:not(:last-child)]:border-b border-gray-100 pb-10']) }}>
     <div class="article-body grid grid-cols-12 gap-3 mt-5 items-start">
         <div class="article-thumbnail col-span-4 flex items-center">
             <a wire:navigate href="{{ route('posts.show', $post->slug) }}">
-                <img class="mw-100 mx-auto rounded-xl" src="" alt="thumbnail">
+                <img class="mw-100 mx-auto rounded-xl" src="{{ $post->getThumbnailUrl() }}" alt="thumbnail">
             </a>
         </div>
         <div class="col-span-8">
@@ -31,7 +30,7 @@
                     </div>
                 </div>
                 <div>
-                    <livewire:like-button :key="$post->id" :$post />
+                    <livewire:like-button :key="'like-' . $post->id" :$post />
                 </div>
             </div>
         </div>
