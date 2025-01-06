@@ -41,6 +41,10 @@ class Post extends Model
     {
         return $this->belongsToMany(User::class, "post_like")->withTimestamps();
     }
+    public function scopeSearch($query, $search = "")
+    {
+        $query->where("title", "ilike", "%{$search}%");
+    }
     public function scopePublished($query)
     {
         $query->where("published_at", "<=", Carbon::now());
@@ -54,6 +58,10 @@ class Post extends Model
         $query->whereHas("categories", function ($query) use ($category) {
             $query->where("slug", $category);
         });
+    }
+    public function scopePopular($query)
+    {
+        $query->withCount("likes")->orderBy("likes_count", "desc");
     }
     public function getExcerpt()
     {
