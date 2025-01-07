@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\CommentResource\Pages;
 
 use App\Filament\Resources\CommentResource;
+use App\Filament\Resources\CommentResource\Widgets\LatestCommentsWidget;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -16,4 +17,5 @@ class ListComments extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
 }

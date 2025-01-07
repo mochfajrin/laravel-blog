@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\Post::truncate();
         \App\Models\Category::truncate();
         \App\Models\User::truncate();
-        \App\Models\User::factory()->create(
+        \App\Models\User::factory()->create();
+        \App\Models\User::create(
             [
                 'name' => Config::get("admin.name"),
                 "role" => 1,
@@ -28,7 +29,7 @@ class DatabaseSeeder extends Seeder
                 'current_team_id' => null,
             ]
         );
-        \App\Models\Category::factory(5)->create();
-        \App\Models\Post::factory(100)->create();
+        \App\Models\Category::factory()->count(10)->create();
+        \App\Models\Post::factory()->count(300)->create();
     }
 }

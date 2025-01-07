@@ -10,11 +10,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PostFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
@@ -23,7 +18,7 @@ class PostFactory extends Factory
             'slug' => $this->faker->slug(3),
             'image' => $this->faker->imageUrl(),
             'body' => $this->faker->paragraph(10),
-            'published_at' => $this->faker->dateTimeBetween('-1 Week', "+1 Week"),
+            'published_at' => $this->faker->dateTimeBetween('-1 Year', "-1 Day"),
             "featured" => $this->faker->boolean(10)
         ];
     }

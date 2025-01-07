@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\UserRoles;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
@@ -32,8 +33,8 @@ class UserResource extends Resource
                     ->maxLength(255),
                 Forms\Components\Select::make('role')
                     ->required()
-                    ->options(User::ROLES)
-                    ->default(3),
+                    ->options(UserRoles::class)
+                    ->default(UserRoles::MEMBER),
             ]);
     }
 
@@ -50,7 +51,6 @@ class UserResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('role')
-                    ->numeric()
                     ->sortable(),
             ])
             ->filters([
