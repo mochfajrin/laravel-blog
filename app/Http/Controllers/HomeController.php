@@ -9,9 +9,18 @@ class HomeController extends Controller
 {
     public function __invoke(Request $request)
     {
+        $featuredPosts = Post::published()
+            ->with("categories")
+            ->featured()
+            ->latest("published_at")
+            ->take(3)->get();
+        $latestPosts = Post::published()
+            ->with("categories")
+            ->latest("published_at")
+            ->take(9)->get();
         return view("home", [
-            "featuredPost" => Post::published()->featured()->latest("published_at")->take(3)->get(),
-            "latestPost" => Post::published()->latest("published_at")->take(9)->get(),
+            "featuredPost" => $featuredPosts,
+            "latestPost" => $latestPosts,
         ]);
     }
 }

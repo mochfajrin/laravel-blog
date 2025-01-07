@@ -23,7 +23,7 @@
             <div class="article-actions-bar mt-6 flex items-center justify-between">
                 <div class="flex gap-x-2 gap-y-1 flex-wrap">
                     @foreach ($post->categories as $category)
-                        <x-post.category-badge :key="$category->id" :$category />
+                        <x-post.category-badge wire:key="{{ $category->id }}" :$category />
                     @endforeach
                     <div class="flex items-center space-x-4">
                         <span class="text-gray-500 text-sm">{{ $post->getReadingTime() }} min read</span>

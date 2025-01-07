@@ -5,7 +5,7 @@
                 Welcome to <span class="text-red-700">Fajrin</span> <span class="text-gray-900"> News</span>
             </h1>
             <p class="text-gray-500 text-lg mt-2">Get News About Programming, Anime, Linux And Other Stuff</p>
-            <a class="px-3 py-2 text-lg text-white bg-red-600 rounded mt-5 inline-block" wire:navigate
+            <a class="px-3 py-2 text-lg text-white bg-black rounded mt-5 inline-block" wire:navigate
                 href="{{ route('posts.index') }}"><strong>Start Reading</strong>
             </a>
         </div>
