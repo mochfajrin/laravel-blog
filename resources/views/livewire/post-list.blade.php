@@ -10,17 +10,17 @@
             @endif
             @if ($search)
                 <span class="ml-2">
-                    containing : <strong> {{ $search }}</strong>
+                    {{ __('blog.containing') }} <strong> {{ $search }}</strong>
                 </span>
             @endif
         </div>
         <div class="flex items-center space-x-4 font-light ">
-            <x-label>Popular</x-label>
+            <x-label>{{ __('blog.filter.popular') }}</x-label>
             <x-checkbox wire:model.live='popular' />
             <button class="{{ $sort == 'desc' ? 'text-red-700 py-4 border-b border-red-800' : 'text-gray-500' }} py-4"
-                wire:click='setSort("desc")'>Latest</button>
+                wire:click='setSort("desc")'>{{ __('blog.filter.latest') }}</button>
             <button class="{{ $sort == 'asc' ? 'text-red-700 py-4 border-b border-red-800' : 'text-gray-500' }} py-4"
-                wire:click='setSort("asc")'>Oldest</button>
+                wire:click='setSort("asc")'>{{ __('blog.filter.oldest') }}</button>
         </div>
     </div>
     <div class="py-4">
