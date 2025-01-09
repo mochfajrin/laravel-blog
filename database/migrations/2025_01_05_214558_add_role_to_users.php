@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Enums\UserRoles;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +17,7 @@ return new class extends Migration {
              * 2. Editor
              * 3. Member
              */
-            $table->tinyInteger("role")->default(User::DEFAULT_ROLE);
+            $table->tinyInteger("role")->default(UserRoles::MEMBER);
         });
     }
 

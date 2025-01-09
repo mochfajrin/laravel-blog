@@ -1,0 +1,47 @@
+networks:
+  app-network:
+    driver: bridge
+services:
+  app:
+    container_name: laravel-blog
+    image: laravel-blog
+    working_dir: /var/www
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./:/var/www
+    networks:
+      - app-network
+  db:
+    container_name: laravel-blog-db
+    image: postgres:16.6-alpine3.21
+    restart: unless-stopped
+    expose:
+      - "5432"
+    ports:
+      - "5434:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE}
+    networks:
+      - app-network
+  webserver:
+    image: nginx:1.27.3-alpine
+    container_name: laravel-blog-webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 3005:80
+    volumes:
+      - ./:/var/www
+      - ./infra/nginx/conf:/etc/nginx/conf.d
+    networks:
+      - app-network
+volumes:
+  db-data: {}
