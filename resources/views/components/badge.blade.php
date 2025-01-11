@@ -8,6 +8,7 @@
         'pink' => 'text-pink-700',
         'orange' => 'text-orange-400',
         'gray' => 'text-gray-700',
+        'green' => 'text-green-700',
         'purple' => 'text-purple-700',
         'white' => 'text-white',
         default => 'text-white',
@@ -20,6 +21,7 @@
         'pink' => 'bg-pink-700',
         'orange' => 'bg-orange-400',
         'gray' => 'bg-gray-700',
+        'green' => 'bg-green-700',
         'purple' => 'bg-purple-700',
         default => 'bg-gray-700',
     };

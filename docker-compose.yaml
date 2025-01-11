@@ -2,36 +2,14 @@ networks:
   app-network:
     driver: bridge
 services:
-  app:
-    container_name: laravel-blog-prod
-    image: laravel-blog:prod
-    build:
-      context: ./
-      dockerfile: Dockerfile
-      args:
-        user: laravel
-        uid: 1000
-    restart: unless-stopped
-    tty: true
-    ports:
-      - 9000:9000
-    working_dir: /var/www
-    volumes:
-      - .:/var/www
-    networks:
-      - app-network
-    depends_on:
-      - db
   db:
-    container_name: laravel-blog-db-test
+    container_name: laravel-blog-db
     image: postgres:16.6
     restart: unless-stopped
-    expose:
-      - "5432"
     ports:
-      - "5434:5432"
+      - 5433:5432
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - ./db-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -40,17 +18,37 @@ services:
       - app-network
   webserver:
     image: nginx:1.27.3
-    container_name: nginx-webserver-test
+    container_name: laravel-blog-webserver
     restart: unless-stopped
     tty: true
-    ports:
-      - 3005:80
-    working_dir: /var/www
     volumes:
-      - ./:/var/www
-      - ./infra/nginx/conf:/etc/nginx/conf.d
+      - ./infra/nginx/conf/:/etc/nginx/conf.d
+      - shared-storage:/var/www
+    ports:
+      - 8000:80
+    depends_on:
+      - app
+      - db
     networks:
       - app-network
+  app:
+    build:
+      dockerfile: app.Dockerfile
+    env_file:
+      - ./.env
+    container_name: laravel-blog
+    image: laravel-blog:latest
+    restart: unless-stopped
+    volumes:
+      - shared-storage:/var/www
+    tty: true
+    ports:
+      - 9000:9000
+    networks:
+      - app-network
+    depends_on:
+      - db
 volumes:
+  shared-storage:
   db-data:
     driver: local
