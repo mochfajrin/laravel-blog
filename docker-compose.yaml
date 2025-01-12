@@ -33,11 +33,13 @@ services:
       - app-network
   app:
     build:
-      dockerfile: app.Dockerfile
+      dockerfile: ./Dockerfile
     env_file:
       - ./.env
+    environment:
+      - APP_ENV=production
     container_name: laravel-blog
-    image: laravel-blog:latest
+    image: mochfajrin/laravel-blog:latest
     restart: unless-stopped
     volumes:
       - shared-storage:/var/www

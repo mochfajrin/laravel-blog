@@ -14,7 +14,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Post::truncate();
         \App\Models\Category::truncate();
         \App\Models\User::truncate();
-        \App\Models\User::factory()->create();
         \App\Models\User::create(
             [
                 'name' => Config::get("admin.name"),
@@ -29,7 +28,10 @@ class DatabaseSeeder extends Seeder
                 'current_team_id' => null,
             ]
         );
-        \App\Models\Category::factory()->count(10)->create();
-        \App\Models\Post::factory()->count(300)->create();
+        if (Config::get("app.env") === "local") {
+            \App\Models\User::factory()->create();
+            \App\Models\Category::factory()->count(10)->create();
+            \App\Models\Post::factory()->count(300)->create();
+        }
     }
 }

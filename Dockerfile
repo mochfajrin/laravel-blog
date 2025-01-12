@@ -15,7 +15,8 @@ RUN apt-get update \
   libpq-dev \
   libzip-dev \
   nodejs \
-  npm
+  npm \
+  vim
 
 
 # Clear cache
@@ -37,6 +38,13 @@ COPY . .
 RUN npm install
 RUN npm run build
 RUN composer install
+
+# laravel optimize and link
+
+RUN php artisan optimize:clear
+RUN php artisan filament:optimize
+RUN php artisan filament:optimize-clear
+RUN php artisan storage:link
 
 # Add user for laravel application
 # Create system user to run Composer and Artisan Commands
