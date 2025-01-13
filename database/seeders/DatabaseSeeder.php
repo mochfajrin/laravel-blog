@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Config;
@@ -28,7 +29,7 @@ class DatabaseSeeder extends Seeder
                 'current_team_id' => null,
             ]
         );
-        if (Config::get("app.env") === "local") {
+        if (App::environment("local")) {
             \App\Models\User::factory()->create();
             \App\Models\Category::factory()->count(10)->create();
             \App\Models\Post::factory()->count(300)->create();

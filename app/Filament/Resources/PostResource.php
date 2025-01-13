@@ -23,6 +23,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class PostResource extends Resource
@@ -83,9 +84,15 @@ class PostResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
-                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()->after(function () {
+                        Cache::flush();
+                    }),
+                    Tables\Actions\ForceDeleteBulkAction::make()->after(function () {
+                        Cache::flush();
+                    }),
+                    Tables\Actions\RestoreBulkAction::make()->after(function () {
+                        Cache::flush();
+                    }),
                 ]),
             ]);
     }

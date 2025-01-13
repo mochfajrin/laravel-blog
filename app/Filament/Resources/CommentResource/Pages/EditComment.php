@@ -5,6 +5,7 @@ namespace App\Filament\Resources\CommentResource\Pages;
 use App\Filament\Resources\CommentResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Cache;
 
 class EditComment extends EditRecord
 {
@@ -15,5 +16,10 @@ class EditComment extends EditRecord
         return [
             Actions\DeleteAction::make(),
         ];
+    }
+
+    protected function afterSave()
+    {
+        Cache::flush();
     }
 }
